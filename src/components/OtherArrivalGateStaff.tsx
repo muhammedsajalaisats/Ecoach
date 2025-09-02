@@ -3,8 +3,8 @@ import { X } from 'lucide-react';
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
-  'https://rwkleqxaxvtvozarkdls.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ3a2xlcXhheHZ0dm96YXJrZGxzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY4Mzk2MzEsImV4cCI6MjA1MjQxNTYzMX0._H3vN1xJBrOqFJIkz--XMAxAqyO8A_Ns1b01NN3h73k'
+  'https://oqxpbtvzaqwznzjcwjdd.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9xeHBidHZ6YXF3em56amN3amRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY0NjI2MjQsImV4cCI6MjA3MjAzODYyNH0.E_B9WhK5QGncAyI_xnnO0gzpbWaHoBdDs4SfBQmkI9U'
 );
 
 const coachNumbers = [
@@ -65,7 +65,7 @@ export function OtherArrival() {
       setAppState('PROCESSING');
       
       const { data: flightData, error: fetchError } = await supabase
-        .from('flightRecords')
+        .from('FlightRecords_DEL')
         .select('*')
         .eq('flight_number', flightNumber)
         .eq('Status', 'Acknowledged');
@@ -135,7 +135,7 @@ export function OtherArrival() {
       const rejectedTime = new Date(now.getTime() + timezoneOffset).toISOString();
       
       const { data: updatedData, error: updateError } = await supabase
-        .from('flightRecords')
+        .from('FlightRecords_DEL')
         .update({
           Verification_Status: 'Rejected',
           Rejected_Coach: 'Rejected',
@@ -179,7 +179,7 @@ export function OtherArrival() {
       const redirectTime = new Date(now.getTime() + timezoneOffset).toISOString();
       
       const updateResult = await supabase
-        .from('flightRecords')
+        .from('FlightRecords_DEL')
         .update({
           Rejected_Coach: 'Redirected',
           Rejected_time: redirectTime
@@ -312,7 +312,7 @@ export function OtherArrival() {
         }
 
         const { data: updatedData, error: updateError } = await supabase
-          .from('flightRecords')
+          .from('FlightRecords_DEL')
           .update(updateData)
           .eq('id', result.id)
           .select();

@@ -3,8 +3,8 @@ import { ScanBarcode, X, AlertCircle } from 'lucide-react';
 import { createClient } from '@supabase/supabase-js';
 
 // Initialize Supabase client with proper headers
-const supabaseUrl = 'https://rwkleqxaxvtvozarkdls.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ3a2xlcXhheHZ0dm96YXJrZGxzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY4Mzk2MzEsImV4cCI6MjA1MjQxNTYzMX0._H3vN1xJBrOqFJIkz--XMAxAqyO8A_Ns1b01NN3h73k';
+const supabaseUrl = 'https://oqxpbtvzaqwznzjcwjdd.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9xeHBidHZ6YXF3em56amN3amRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY0NjI2MjQsImV4cCI6MjA3MjAzODYyNH0.E_B9WhK5QGncAyI_xnnO0gzpbWaHoBdDs4SfBQmkI9U';
 
 const supabase = createClient(supabaseUrl, supabaseKey, {
   global: {
@@ -57,7 +57,7 @@ export function CoachReleasePage() {
     try {
       // First, find the most recent record for the selected coach
       const { data: latestRecord, error: fetchError } = await supabase
-        .from('flightRecords')
+        .from('FlightRecords_DEL')
         .select('id, coach_number, Status')
         .eq('coach_number', selectedCoach)
         .order('created_at', { ascending: false })
@@ -78,7 +78,7 @@ export function CoachReleasePage() {
 
       // Then update the status of that record
       const { error: updateError } = await supabase
-        .from('flightRecords')
+        .from('FlightRecords_DEL')
         .update({ 
           Status: 'Closed',
           Verification_Status : 'Completed'

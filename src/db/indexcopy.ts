@@ -1,6 +1,6 @@
 // import { createClient } from '@supabase/supabase-js';
-// const supabaseUrl = 'https://rwkleqxaxvtvozarkdls.supabase.co';
-// const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ3a2xlcXhheHZ0dm96YXJrZGxzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY4Mzk2MzEsImV4cCI6MjA1MjQxNTYzMX0._H3vN1xJBrOqFJIkz--XMAxAqyO8A_Ns1b01NN3h73k';
+// const supabaseUrl = 'https://oqxpbtvzaqwznzjcwjdd.supabase.co';
+// const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9xeHBidHZ6YXF3em56amN3amRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY0NjI2MjQsImV4cCI6MjA3MjAzODYyNH0.E_B9WhK5QGncAyI_xnnO0gzpbWaHoBdDs4SfBQmkI9U';
 
 // const supabase = createClient(supabaseUrl, supabaseKey);
 
@@ -11,7 +11,7 @@
 //   coachNumber: string
 // ) => {
 //   const { data, error } = await supabase
-//     .from('flightRecords')
+//     .from('FlightRecords_DEL')
 //     .insert([
 //       {
 //         flightNumber,
@@ -31,7 +31,7 @@
 
 // export const getFlightRecords = async () => {
 //   const { data, error } = await supabase
-//     .from('flightRecords')
+//     .from('FlightRecords_DEL')
 //     .select('*');
 
 //   if (error) {
