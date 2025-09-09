@@ -161,10 +161,9 @@ async function completeExpiredDisembarkations() {
     // Find records where timer has expired but disembarkation isn't completed
     const { data: expiredRecords, error: fetchError } = await supabase
       .from('FlightRecords_DEL')
-      .select('id, timer_ends')
+      .select('id, timer_ends, Status, disembarked_time')
       .lt('timer_ends', currentTime)
-      .is('disembarked_time', null)
-      .neq('Status', 'Closed');
+      .is('disembarked_time', null);
 
     if (fetchError) {
       console.error('Error fetching expired records:', fetchError);
@@ -179,13 +178,22 @@ async function completeExpiredDisembarkations() {
 
     // Complete disembarkation for each expired record
     for (const record of expiredRecords) {
+      // Skip if already closed
+      if (record.Status === 'Closed') {
+        console.log(`Record ${record.id} already closed, skipping`);
+        continue;
+      }
+
       try {
+        // Use the record's timer_ends time as disembarked_time, not current time
+        const disembarkedTime = record.timer_ends;
+
         const { error: updateError } = await supabase
           .from('FlightRecords_DEL')
           .update({
             Status: 'Closed',
             Verification_Status: 'Completed',
-            disembarked_time: currentTime,
+            disembarked_time: disembarkedTime,
             timer_start: null,
             timer_ends: null
           })
@@ -194,7 +202,7 @@ async function completeExpiredDisembarkations() {
         if (updateError) {
           console.error(`Error updating record ${record.id}:`, updateError);
         } else {
-          console.log(`Successfully completed disembarkation for record ${record.id}`);
+          console.log(`Successfully completed disembarkation for record ${record.id} with timer end time: ${disembarkedTime}`);
         }
       } catch (err) {
         console.error(`Error processing record ${record.id}:`, err);
