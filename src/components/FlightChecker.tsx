@@ -13,6 +13,7 @@ interface FlightData {
   flightName: string;
   type: string;
   origin: string;
+  terminal?: string;
 }
 
 interface FlightCheckerProps {
@@ -147,6 +148,7 @@ export function FlightChecker({ coachNo }: FlightCheckerProps) {
     flightName?: string;
     id?: number;
     origin?: string;
+    terminal?: string;
   } | null>(null);
   const [flightData, setFlightData] = useState<FlightData[]>([]);
   const [saveStatus, setSaveStatus] = useState<"idle" | "success" | "error">("idle");
@@ -289,6 +291,7 @@ export function FlightChecker({ coachNo }: FlightCheckerProps) {
         flightName: flight.flightName,
         id: flight.id,
         origin: flight.origin,
+        terminal: flight.terminal,
       });
     } else {
       setResult({ found: false });
@@ -448,6 +451,12 @@ export function FlightChecker({ coachNo }: FlightCheckerProps) {
                           {result.origin}
                         </span>
                       </p>
+                      <p className="text-sm flex items-center justify-between">
+                        <span className="text-gray-600">Terminal:</span>{" "}
+                        <span className="font-semibold text-gray-800">
+                          {result.terminal || 'N/A'}
+                        </span>
+                      </p>
                       <p className="text-xs flex items-center justify-between">
                         <span className="text-gray-600">Type:</span>{" "}
                         <span
@@ -537,6 +546,7 @@ export function FlightChecker({ coachNo }: FlightCheckerProps) {
               <p><span className="font-medium">Coach:</span> {coachNumber} {!validCoachNumbers.includes(coachNumber) && <span className="text-red-500">(Invalid!)</span>}</p>
               <p><span className="font-medium">Flight:</span> {flightNumber}</p>
               <p><span className="font-medium">Type:</span> {result?.type}</p>
+              <p><span className="font-medium">Terminal:</span> {result?.terminal || 'N/A'}</p>
             </div>
             {!validCoachNumbers.includes(coachNumber) ? (
               <p className="mb-4 text-red-500">Cannot submit: Invalid coach number</p>
