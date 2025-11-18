@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { X, CheckCircle } from 'lucide-react';
 import { createClient } from '@supabase/supabase-js';
@@ -23,6 +22,7 @@ interface ScanResult {
   flight_type: string;
   flight_name: string;
   coach_number: string;
+  terminal: string;
   created_at: string;
   Status?: string;
   Verification_Status?: string;
@@ -360,9 +360,15 @@ export function CoachStatus({ coachNo }: CoachStatusProps) {
             <p className="text-sm opacity-80">Coach Number</p>
             <p className="text-3xl font-bold">{result.coach_number}</p>
           </div>
+
           <div className="bg-white bg-opacity-20 rounded-lg p-4 mb-6">
             <p className="text-sm opacity-80">Flight Number</p>
             <p className="text-3xl font-bold">{result.flight_number}</p>
+          </div>
+
+          <div className="bg-white bg-opacity-20 rounded-lg p-4 mb-6">
+            <p className="text-sm opacity-80">Terminal</p>
+            <p className="text-3xl font-bold">{result.terminal}</p>
           </div>
 
           <div className="space-y-5 mb-0">
@@ -400,6 +406,11 @@ export function CoachStatus({ coachNo }: CoachStatusProps) {
           <div className="bg-white bg-opacity-20 rounded-lg p-4 mb-8 w-full max-w-xs">
             <p className="text-sm opacity-80 text-center">Coach Number</p>
             <p className="text-3xl font-bold text-center">{result.coach_number}</p>
+          </div>
+
+          <div className="bg-white bg-opacity-20 rounded-lg p-4 mb-8 w-full max-w-xs">
+            <p className="text-sm opacity-80 text-center">Terminal</p>
+            <p className="text-3xl font-bold text-center">{result.terminal}</p>
           </div>
 
           <div className="text-center mb-8">

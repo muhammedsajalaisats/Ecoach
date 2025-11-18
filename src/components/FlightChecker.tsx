@@ -221,7 +221,8 @@ export function FlightChecker({ coachNo }: FlightCheckerProps) {
     flightNumber: string,
     flightType: string,
     flightName: string,
-    coachNumber: string
+    coachNumber: string,
+    terminal?: string
   ) => {
     try {
       // Validate coach number before proceeding
@@ -247,6 +248,7 @@ export function FlightChecker({ coachNo }: FlightCheckerProps) {
             flight_type: flightType,
             flight_name: flightName,
             coach_number: coachNumber,
+            terminal: terminal, // Added terminal field
             created_at: indianTime,
             Status: "Open",
             // Device tracking fields
@@ -336,7 +338,8 @@ export function FlightChecker({ coachNo }: FlightCheckerProps) {
         flightNumber,
         result.type,
         result.flightName,
-        coachNumber
+        coachNumber,
+        result.terminal // Pass terminal to save function
       );
 
       setSaveStatus("success");
