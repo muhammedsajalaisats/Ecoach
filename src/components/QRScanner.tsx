@@ -30,6 +30,7 @@ interface ScanResult {
   disembarked_time?: string;
   timer_start?: string;
   timer_ends?: string;
+  terminal?: string;
 }
 
 type AppState = 'GATE_SELECTION' | 'PROCESSING' | 'RESULT' | 'ACTION_PROCESSING' | 'ACTION_COMPLETE' | 'REJECTED' | 'REJECTION_PROCESSING' | 'REDIRECT_PROCESSING' | 'DOOR_OPENED';
@@ -537,6 +538,12 @@ export function QRScanner({ coachNo }: QRScannerProps) {
         <span className="text-gray-600">Coach Number:</span>
         <span className="font-semibold">{result.coach_number}</span>
       </p>
+      {result.terminal && (
+        <p className="flex justify-between text-xs">
+          <span className="text-gray-600">Terminal:</span>
+          <span className="font-semibold text-green-600">{result.terminal}</span>
+        </p>
+      )}
       {assignedCoachesCount > 0 && (
         <p className="flex justify-between text-xs">
           <span className="text-gray-600">Assigned Coaches:</span>
@@ -749,6 +756,9 @@ export function QRScanner({ coachNo }: QRScannerProps) {
           <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg text-center">
             <p className="text-gray-600 text-sm mb-1">Processing Coach Number</p>
             <h3 className="text-2xl font-bold text-blue-700">{currentCoachNumber}</h3>
+            {result?.terminal && (
+              <p className="text-sm text-green-600 mt-1">Terminal: {result.terminal}</p>
+            )}
             <p className="text-xs text-gray-500 mt-1">Please select gate type to proceed</p>
           </div>
         )}
@@ -790,6 +800,9 @@ export function QRScanner({ coachNo }: QRScannerProps) {
             <p className="text-gray-600 mb-4 text-sm">
               This is a {result?.flight_type?.toUpperCase().includes('DOMESTIC') ? 'Domestic Arrival' : 'International Arrival'} flight. Are you sure you want to accept?
             </p>
+            {result?.terminal && (
+              <p className="text-gray-600 mb-2 text-sm">Terminal: <span className="font-semibold text-green-600">{result.terminal}</span></p>
+            )}
             <div className="flex gap-2">
               <button
                 onClick={() => handleConfirmation(true)}
