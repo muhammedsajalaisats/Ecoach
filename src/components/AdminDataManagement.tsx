@@ -9,7 +9,8 @@ export function AdminDataManagement() {
     flightName: '',
     flightNumber: '',
     flightType: '',
-    origin: ''
+    origin: '',
+    terminal: ''
   });
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle');
   const [validationError, setValidationError] = useState<string | null>(null);
@@ -101,7 +102,7 @@ export function AdminDataManagement() {
   };
 
   const validateInputs = () => {
-    if (!flightDetails.flightName || !flightDetails.flightNumber || !flightDetails.flightType || !flightDetails.origin) {
+    if (!flightDetails.flightName || !flightDetails.flightNumber || !flightDetails.flightType || !flightDetails.origin || !flightDetails.terminal) {
       setValidationError('All fields are required.');
       return false;
     }
@@ -129,11 +130,12 @@ export function AdminDataManagement() {
         flightDetails.flightNumber,
         flightDetails.flightType,
         flightDetails.flightName,
-        flightDetails.origin
+        flightDetails.origin,
+        flightDetails.terminal
       );
       setSaveStatus('success');
       setTimeout(() => setSaveStatus('idle'), 3000);
-      setFlightDetails({ flightName: '', flightNumber: '', flightType: '', origin: '' });
+      setFlightDetails({ flightName: '', flightNumber: '', flightType: '', origin: '', terminal: '' });
     } catch (error) {
       console.error('Error saving flight record:', error);
       setSaveStatus('error');
@@ -207,6 +209,17 @@ export function AdminDataManagement() {
               placeholder="Origin"
               className="w-full p-2 mb-3 border rounded-lg"
             />
+            <select
+              name="terminal"
+              value={flightDetails.terminal}
+              onChange={handleChange}
+              className="w-full p-2 mb-3 border rounded-lg"
+            >
+              <option value="" disabled>Select Terminal</option>
+              <option value="T1">T1</option>
+              <option value="T2">T2</option>
+              <option value="T3">T3</option>
+            </select>
             <button
               onClick={handleSaveConfirmation}
               disabled={saveStatus === 'saving'}
