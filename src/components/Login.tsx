@@ -27,7 +27,7 @@ export function Login({ onLogin }: LoginProps) {
       <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
         <div className="flex items-center gap-3 mb-8">
           <LogIn className="w-8 h-8 text-blue-500" />
-          <img src="https://aisats.in/images/Logo1.png" alt="" />
+          <img src="/icons/Logo1.png" alt="" />
           {/* <h1 className="text-2xl font-bold text-gray-800">Flight Checker Login</h1> */}
         </div>
 
