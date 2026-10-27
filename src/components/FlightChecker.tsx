@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Search, Plane, Save } from "lucide-react";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from '../lib/supabase';
 
 interface FlightData {
   id?: number;
@@ -28,10 +28,6 @@ interface DeviceInfo {
   timestamp: string;
 }
 
-const supabase = createClient(
-  "https://oqxpbtvzaqwznzjcwjdd.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9xeHBidHZ6YXF3em56amN3amRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY0NjI2MjQsImV4cCI6MjA3MjAzODYyNH0.E_B9WhK5QGncAyI_xnnO0gzpbWaHoBdDs4SfBQmkI9U"
-);
 
 const validCoachNumbers = [
   "PC-01", "PC-02", "PC-03", "PC-04", "PC-05",

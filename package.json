@@ -49,7 +49,7 @@
     "vite-plugin-pwa": "^1.0.0"
   },
   "engines": {
-    "node": ">=16.0.0",
+    "node": "22.x",
     "npm": ">=7.0.0"
   }
 }

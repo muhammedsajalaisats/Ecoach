@@ -11,13 +11,8 @@ import { CoachStatus } from './components/CoachStatus';
 import { Coachoperatorf } from './components/CoachOperator';
 import { SuperDataManagement } from './components/superadmin';
 import { CoachReleasePage } from './components/CoachReleasepage';
-import { createClient } from '@supabase/supabase-js';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-
-const supabase = createClient(
-  'https://oqxpbtvzaqwznzjcwjdd.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9xeHBidHZ6YXF3em56amN3amRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY0NjI2MjQsImV4cCI6MjA3MjAzODYyNH0.E_B9WhK5QGncAyI_xnnO0gzpbWaHoBdDs4SfBQmkI9U'
-);
+import { supabase } from './lib/supabase';
 
 declare module './components/QRScanner' {
   interface QRScannerProps {
@@ -158,7 +153,7 @@ function AppContent() {
 
 function App() {
   return (
-    <Router>
+    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Routes>
         <Route path="/" element={<AppContent />} />
         <Route path="/other-coach-status" element={<AppContent />} />
